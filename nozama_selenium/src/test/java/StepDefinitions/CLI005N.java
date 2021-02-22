@@ -1,9 +1,13 @@
 package StepDefinitions;
 
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -19,24 +23,15 @@ import cucumber.api.java.en.When;
 public class CLI005N {
 
 	private WebDriver driver;
+	private StringBuffer verificationErrors = new StringBuffer();
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
-
-	String login;
-	String mdp;
-	String nom;
-	String prenom;
-	String rue;
-	String ville;
-	String codepostal;
-	String numerocarte;
-	String datecarte;
-	String codecrypto;
 
 	@Given("^Linternaute demande a commande le contenu de son panier$")
 	public void linternaute_demande_a_commande_le_contenu_de_son_panier() {
 		System.setProperty("webdriver.gecko.driver", "S:\\TESTEUR INFORMATIQUE\\7_SELENIUM\\geckodriver.exe");
 		driver = new FirefoxDriver();
+		
 		js = (JavascriptExecutor) driver;
 		vars = new HashMap<String, Object>();
 		driver.get("http://127.0.0.1/nozama/");
@@ -98,12 +93,30 @@ public class CLI005N {
 		driver.findElement(By.id("edit-pass")).click();
 		driver.findElement(By.xpath("//input[@id=\'edit-pass\']")).sendKeys(mdp);
 		driver.findElement(By.id("edit-submit")).click();
+		
+		/*
+		 * VERIFICATION DE LA CORRESPONDANCE VARIABLES UTILISATEUR LOGE ET UTILISATEUR
+		 * AFFICHE on clique sur compte et on assert text l'élément utilisateur
+		 */
+		driver.findElement(By.xpath("/html/body/div/div/div[4]/div/div/div/div/ul/li[3]/a")).click();
+		System.out.println("Début de la vérification du Xpath");
+		driver.findElement(By.xpath("/html/body/div/div/div[5]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/div/h1"));
+		System.out.println("Vérification du Xpath OK");
+		
+		System.out.println("#######################################");
+		WebElement verifLogin = driver.findElement(By.xpath("/html/body/div/div/div[5]/div/div/div[2]/div/div/div/div/div/div/div/div[2]/div/h1"));
+		assertEquals(verifLogin.getText(), login);		
+		System.out.println("##################"+verifLogin.getText()+"#####################");
+		
+		// FIN DE LA VERIF
+		
 		{
 			WebDriverWait wait = new WebDriverWait(driver, 0);
 			wait.until(ExpectedConditions
 					.presenceOfElementLocated(By.xpath("//fieldset[@id=\'customer-pane\']/div/div[2]/a")));
 		}
 		driver.findElement(By.cssSelector("#delivery-pane a")).click();
+
 	}
 
 	@When("^linternaute saisit son \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")

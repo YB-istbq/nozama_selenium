@@ -29,5 +29,3 @@ Scenario Outline: Linternaute finalise sa commande en rentrant les informations
   Examples: 
     | login  | mdp  	| nom     | prenom | rue                 | ville  | codepostal  | numerocarte      | datecarte | codecrypto |
     | demo1  | demo1  |  Dupont | Marc   | 2 rue de Bretagne   | Rennes | 35000       | 5584439845217150 | 01/2022	 | 125				|
-    | demo2  | demo2  |  Aurel  | Marc   | 2 rue de BZH			   | Rennes | 35100       | 5584439845217150 | 01/2024	 | 125				|
-    | demo3  | demo3  |  Lavoine| Marc   | 2 rue de Bretonne   | Rennes | 35200       | 5584439845217150 | 01/2025	 | 125				|
