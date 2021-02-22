@@ -22,17 +22,6 @@ public class CLI005N {
 	private Map<String, Object> vars;
 	JavascriptExecutor js;
 
-	String login;
-	String mdp;
-	String nom;
-	String prenom;
-	String rue;
-	String ville;
-	String codepostal;
-	String numerocarte;
-	String datecarte;
-	String codecrypto;
-
 	@Given("^Linternaute demande a commande le contenu de son panier$")
 	public void linternaute_demande_a_commande_le_contenu_de_son_panier() {
 		System.setProperty("webdriver.gecko.driver", "S:\\TESTEUR INFORMATIQUE\\7_SELENIUM\\geckodriver.exe");
